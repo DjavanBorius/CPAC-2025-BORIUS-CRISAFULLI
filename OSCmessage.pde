@@ -1,19 +1,17 @@
-
-// Cette fonction est appelée chaque fois qu'un message OSC est reçu
+// Each time an OSC message is received this function is called
 void oscEvent(OscMessage msg) {
-  // Afficher l'adresse et les données du message OSC
   String addr = msg.addrPattern();
-  //println(addr);
-  if (addr.startsWith("/6")) {
+  
+  if (addr.startsWith("/6")) { //this part is called when we work if OSC on IOS device
     receive = 1;
     Message = msg;
     checkpush(msg);
   }
-  if (msg.checkAddrPattern("/oscControl/gridToggle")) {
+  if (msg.checkAddrPattern("/oscControl/gridToggle")) { //This part is called when we work with OSC Controller and sensor2OSC on Android devices
       receive = 1;
       Message = msg;
-      println("Message reçu depuis: " + msg.addrPattern());
-      println("Données: " + msg.get(0).floatValue());
+      //println("Message received from: " + msg.addrPattern());
+      //println("Data : " + msg.get(0).floatValue());
   }
   if (msg.checkAddrPattern("/accelerometer") && (Message.get(0).floatValue()==4.0)) {   
     String senderAddr = msg.netAddress().address();
@@ -21,7 +19,6 @@ void oscEvent(OscMessage msg) {
     float x = msg.get(1).floatValue();
     float y = msg.get(0).floatValue();
     float z = msg.get(2).floatValue();
-    //println("x: " + msg.get(0).floatValue()+" y: " + msg.get(1).floatValue()+" z: " + msg.get(2).floatValue());
     //println("Message reçu depuis: " + msg.addrPattern());
     if (sqrt(pow(x,2)+pow(y,2)+pow(z,2))>13) {
       // Map OSC data to canvas size
@@ -46,36 +43,30 @@ void oscEvent(OscMessage msg) {
 void checkpush(OscMessage msg)
 {
   if(msg.checkAddrPattern("/6/push1") && msg.get(0).floatValue()!=0.0){
-    message = 1.0;
+    module = 1.0;
     println("Message reçu depuis: " + msg.addrPattern());
-    println("Données: " + msg.get(0).floatValue());
   }
   if(msg.checkAddrPattern("/6/push2") && msg.get(0).floatValue()!=0.0){
-    message = 2.0;
+    module = 2.0;
     println("Message reçu depuis: " + msg.addrPattern());
-    println("Données: " + msg.get(0).floatValue());
   }if(msg.checkAddrPattern("/6/push3") && msg.get(0).floatValue()!=0.0){
-    message = 3.0;
+    module = 3.0;
     println("Message reçu depuis: " + msg.addrPattern());
-    println("Données: " + msg.get(0).floatValue());
   }if(msg.checkAddrPattern("/6/push4") && msg.get(0).floatValue()!=0.0){
-    message = 4.0;
+    module = 4.0;
     println("Message reçu depuis: " + msg.addrPattern());
-    println("Données: " + msg.get(0).floatValue());
   }if(msg.checkAddrPattern("/6/push5") && msg.get(0).floatValue()!=0.0){
-    message = 5.0;
+    module = 5.0;
     println("Message reçu depuis: " + msg.addrPattern());
-    println("Données: " + msg.get(0).floatValue());
   }
 }
 
 //sending message to touchDesigner
 void SendMessage(float energy, float entropy, float drop) {
-  OscMessage msg = new OscMessage("/musicvalues"); // Adresse OSC
+  OscMessage msg = new OscMessage("/musicvalues"); // OSC adress
   msg.add(energy*10); // Add the value of the energy to the message
-  msg.add(entropy); //
-  msg.add(drop*100);
-  println("energy : " + feat.energy*100 + " drop : " + feat.drop*100 + " entropy : " + feat.entropy);
+  msg.add(entropy); //   Same with entropy
+  msg.add(drop*100);//   Same with drop
   if(feat.drop*100<17&&looper==0){ 
       msg.add(290);
       looper =0;
@@ -86,6 +77,5 @@ void SendMessage(float energy, float entropy, float drop) {
       msg.add(35);
       looper = 200;
   }
-  //println(msg.get(0).intValue());
   oscP5.send(msg, touchDesignerAddress); // Envoyer le message  
 }

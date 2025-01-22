@@ -1,4 +1,3 @@
-
 // Function to apply a fading effect to the canvas
 void applyFading() {
   canvas.beginDraw();
@@ -53,8 +52,8 @@ class Splat {
     canvas.endDraw();
   }
 
-  // Check if the splatter should disappear after 2 seconds
+  // Check if the splatter should disappear after 1 seconds
   boolean isExpired() {
-    return millis() - creationTime > 1000;  // 2000 ms = 2 seconds
+    return millis() - creationTime > 1000;  // 1000 ms = 1 seconds
   }
 }

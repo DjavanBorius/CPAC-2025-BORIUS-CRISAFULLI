@@ -48,40 +48,35 @@ class Plate {
   }  
 }
 
-// Définir une classe Grain pour représenter chaque petit grain
+// Definition of a class Grain to represent each little grain
 class Grain {
-  float x, y; // Position du grain
-  float size; // Taille du grain
-  float speedX, speedY; // Vitesse du grain sur les axes X et Y
+  float x, y; // grain position
+  float size; // grain size
   
-  // Constructeur de la classe Grain
   Grain(float x, float y, float size) {
     this.x = x;
     this.y = y;
     this.size = size;
-    //Générer des vitesses aléatoires pour chaque grain
-    this.speedX = random(-2, 2);
-    this.speedY = random(-2, 2);
-  }
+   }
 }
 
 Plate plate;
-Grain[] grains; // Tableau pour stocker tous les grains
-int numGrains=0; // Nombre de grains à générer
+Grain[] grains; // Table to stock all the grains
+int numGrains=0; // Number of grains to be generated
 int xcols, yrows;
 float[] x, y;
 int[] px,py;
 float F; //[Hz]
 
-// Méthode pour mettre à jour la position du grain
+// Method to actualize grain's positions
 int update_grains(float[][] mode) {
    float[] x_i = linspace(0,1,100);
    float[] y_i = linspace(0,1,100);
    int numGrains = 0;
-   // Créer chaque grain avec une position en fonction du mode de vibration
+   // Create each grain with a position according the mode vibration
    for (int i = 0; i < xcols; i++) {
      for (int j = 0; j < yrows; j++) {
-       // Position des points sur le plateau
+       // Position of the grain on the table
        if(mode[i][j]<=-1.8){
           px[numGrains] = floor(x_i[i]*1000);
           py[numGrains] = floor(y_i[j]*1000);
@@ -98,11 +93,11 @@ int update_grains(float[][] mode) {
     return numGrains;
 }
   
-// Méthode pour dessiner le grain
+// Method to display the grains
 void display_grains(int numGrains) {
   for (int i = 0; i < numGrains; i++) {
   noStroke();
-  fill(255); // Couleur blanche pour les grains
-  ellipse(grains[i].x, grains[i].y, grains[i].size, grains[i].size); // Dessiner un cercle à la position du grain*/  
+  fill(255); // White color for the grains
+  ellipse(grains[i].x, grains[i].y, grains[i].size, grains[i].size);   
   }
 }

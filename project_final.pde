@@ -1,21 +1,16 @@
 //IP adress phone : 192.168.43.61 wifi : 192.168.1.12
 import oscP5.*;
 import netP5.*;
-import gab.opencv.*; 
-import processing.video.*;
 import processing.sound.*;
 import java.util.ArrayList;
 
-
+//Initiate variables
 OscP5 oscP5;
-OscP5 oscP6;
 OscMessage Message;
-OscMessage Message2;
 OscProperties properties;
 int receive;
-float message;
+float module;
 NetAddress touchDesignerAddress;
-OpenCV opencv=null;
 float[][] norms;
 AudioIn input;
 PitchDetector pitch;
@@ -28,7 +23,7 @@ int switchgeom = 0;
 int looper =0;
 PGraphics canvas;
 ArrayList<Splat> splatters;
-
+///////////////////////////
 
 void setup() {
   size(1000, 1000);
@@ -36,7 +31,7 @@ void setup() {
   // start capturing the sound from reckordbox
   input = new AudioIn(this, 0); // 0 is the default input channel
   input.start();
-  input.amp(5.0);
+  input.amp(5.0); //increase the amplitude of the sound for better processing with FFT
   pitch = new PitchDetector(this);
   pitch.input(input);
   beat = new BeatDetector(this);
@@ -55,7 +50,7 @@ void setup() {
   y = linspace(0,1,yrows);
   px = new int[5000];
   py = new int[5000];
-  // Créer chaque grain avec une position en fonction du mode de vibration
+  // Create each grain with a position according the vibration mode
   for (int i = 0; i < xcols; i++) {
     for (int j = 0; j < yrows; j++) {
       // Position des points sur le plateau
@@ -85,54 +80,52 @@ void setup() {
   
   // Setup interactive painting
   canvas = createGraphics(width, height);
-  // Initialize splatters list
   splatters = new ArrayList<Splat>();
   
   // Start OSC message
   oscP5 = new OscP5(this, 57120);
   properties = new OscProperties();
-  oscP6 = new OscP5(this, 55000);
-  receive = 0; //0
+  receive = 0; 
+  
   // Start sending OSC message on another port
-  touchDesignerAddress = new NetAddress("192.168.43.61", 8000); // Remplacez 8000 par le port défini dans TouchDesigner
+  touchDesignerAddress = new NetAddress("192.168.1.12", 8000); // Port defined in TouchDesigner
 }
 
 
 void draw() {
   if(receive==1){
-    float message = Message.get(0).floatValue(); 
-    if (message == 1.0) {
+    float module = Message.get(0).floatValue(); // This value choose the module
+    if (module == 1.0) {
       displayScreen1();
-    } else if (message == 2.0) {
-      background(0); // Arrière-plan noir
+    } else if (module == 2.0) {
+      background(0); 
       surface.setVisible(true);
-      F = pitch.analyze(0.15);
+      F = pitch.analyze(0.15); //find the fundamental frequency
       float[][] mode = plate.vibration_modes(plate.mode, xcols, yrows, F);
       delay(100);
       numGrains = update_grains(mode);
       display_grains(numGrains);
-    } else if (message == 3.0) {
+    } else if (module == 3.0) {
       background(0);
       surface.setVisible(true);
       feat.reasoning(fft.analyze(Spectrum));
       if(feat.drop*100>17){ 
         switchgeom = 1;
-        println("energy : " + feat.energy*100 + " drop : " + feat.drop*100 + " entropy : " + feat.entropy);
       } 
       switch(switchgeom) {
       case 0:
-        drawCircle(0, 10*feat.energy, feat.flatness, feat.entropy); 
+        drawCircle(0, 10*feat.energy, feat.entropy); 
         break;
       case 1:
         for (int i=0;i<5;i++){
             circ[i].c = random(400);
-            drawCircle(i, feat.energy*0.1, feat.flatness, feat.entropy);
+            drawCircle(i, feat.energy*0.1, feat.entropy);
         }
         looper += 1;
         if(looper>300){switchgeom = 0; looper=0;}
         break;
       }  
-      } else if (message == 4.0) {
+      } else if (module == 4.0) {
          surface.setVisible(true);
          applyFading();
          // Display the canvas
@@ -146,14 +139,15 @@ void draw() {
             s.display();
           }
         } 
-      } else if (message == 5.0) {
+      } else if (module == 5.0) {
         surface.setVisible(false);
-        delay(20);
+        delay(30); //allows to better se the effect of TouchDesigner
         feat.reasoning(fft.analyze(Spectrum));
-        SendMessage(feat.energy, feat.entropy, feat.drop);
+        SendMessage(feat.energy, feat.entropy, feat.drop); //send information to TouchDesigner
       }
   } else {
-    displayScreen1(); }
+    displayScreen1();
+  }
 }
 
 void displayScreen1() {
