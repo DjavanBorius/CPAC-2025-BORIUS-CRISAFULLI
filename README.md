@@ -54,8 +54,8 @@ So the chain to use the program properly is:
 ---
 
 ## Students
-- Djavan Borius (djavan.borius@mail.polimi.it):worked on the interaction of the different software (Processing, reckordbox and ToucheDesigner). Coded the module Chladni pattern. Worked on the presentation, the report and video making.
-- Andrea Crisafulli (andrea.crisafulli@mail.polimi.it):worked on the modules Circle Dancing, features, Interactive Painting. Worked on the presentation, the report and video making.
+- Djavan Borius (djavan.borius@mail.polimi.it): worked on the interaction of the different software (Processing, reckordbox and ToucheDesigner). Worked on the modules Chladni patterns, fractal and interactive painting. Worked on the presentation, the report and video making.
+- Andrea Crisafulli (andrea.crisafulli@mail.polimi.it): worked on the modules Circle Dancing, features. Worked on the presentation, the report and video making.
 
 This project was developed as part of the Creative Programming and Computing course at Politecnico di Milano (2024/2025).
 
