@@ -20,16 +20,16 @@ The different visual art modules are interacting with the music and make the enc
 All modules are coded in Processing except for Fractal visual that is coded with TouchDesigner. This increases the number of options we have to make visual art aided by a computer.
 The modules are:
 
-- **Chladni Patterns**:
+1. **Chladni Patterns**:
 Visual that reminds of grains on a plate which moves depending on the fundamental frequency of the sound, assuming different shapes (Chladnni figures).
 
-- **Circle Dancing**:
+2. **Circle Dancing**:
 Visual where circles move in association to the beat. Thought for disco music, the program can show one or five circles depending on different parts of the song.
 
-- **Interactive Painting**:
+3. **Interactive Painting**:
 External devices are associated with colors, and they send OSC messages to the program in order to display splat spots on the screen that disappear after a short time. Thought to involve audience in the performance.
 
-- **Fractal Art**:
+4. **Fractal Art**:
 Fractal art visuals that change according to the music.
 
 
