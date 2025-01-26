@@ -1,14 +1,3 @@
-# CPAC-2025-BORIUS-CRISAFULLI
-CPAC project for year 2024-2025, group of 2 with Djavan BORIUS and Andrea CRISAFULLI
-
-Files in processing and TouchDesigner are the code.
-To make everything work all devices need to be connected to the same IP adress. Make sure you changed the line related to the OSC messages in the codes (OSC message and project_final)
-If you want bespoke feature you can easily modify the class of circle and painting. 
-For the TouchDesigner code you need to launch it in the same time as the processing code. If you have a paying version of TouchDesigner you can use the functions Spout of TouchDesigner to collect the 
-video in processing.
-
-In the github page you can also find the presentation document as a pdf, the thumnail image and the 3 images of the project.
-
 # DJ Art Designer
 
 ## Overview
@@ -72,10 +61,10 @@ This project was developed as part of the Creative Programming and Computing cou
 
 ---
 
-## Future Enhancements
+## Other information and explainations
 
-- **MIDI Protocol Support**: Enable the use of physical instruments as controllers for playing the mini-games.  
-- **New Instrument Interfaces**: Introduce additional virtual instruments tailored for games focused on harmony and chord recognition.  
-- **Musical Notation Integration**: Add a staff view to visually represent chords and drum grooves, enhancing the educational experience.  
-- **Expanded Multiplayer Features**: Introduce a "Jam Mode" where players can use the implemented virtual instruments to play together in real-time.  
-- **User-Created Content**: Allow players to create and integrate custom grooves and fills into the gameplay.  
+Files in processing and TouchDesigner are the code.
+To make everything work all devices need to be connected to the same IP adress. Make sure you changed the line related to the OSC messages in the codes (OSC message and project_final)
+If you want bespoke feature you can easily modify the class of circle and painting. 
+For the TouchDesigner code you need to launch it in the same time as the processing code. If you have a paying version of TouchDesigner you can use the functions Spout of TouchDesigner to collect the 
+video in processing.
