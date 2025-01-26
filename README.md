@@ -1,12 +1,12 @@
 # DJ Art Designer
 
 ## Overview
-DJ Art Designer is a programm that embrace both Novel Instrument Design and Generative Art.
+DJ Art Designer is a program that embrace both Novel Instrument Design and Generative Art.
 
 ## Description
-The purpose of DJ Art Designer is to enhance the performance of DJs by creating visuals associated to the music in order to give audience a visual feedback and involving them more, increasing the emotional aspects that live show music convey. 
+The purpose of DJ Art Designer is to enhance the performance of DJs by creating visuals associated to the music in order to give audience a visual feedback and involving them more, increasing the emotional aspects that live music shows convey. 
 The different visual art modules are interacting with the music and make the enchantment for the show bigger.
-All modules are coded in Processing except for Fractal visual that is coded with TouchDesigner. This increases the number of options we have to make visual art aided by a computer.
+All modules are coded in Processing except for fractal module that is coded with TouchDesigner. This increases the number of options we have to make visual art aided by a computer.
 The modules are:
 
 1. **Chladni Patterns**:
